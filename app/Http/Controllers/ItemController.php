@@ -39,7 +39,7 @@ class ItemController extends Controller
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:20',
-                'image' => 'required',
+                'image' => 'required|image',
                 'detail' => 'required|max:100',
             ],[
                 'name.required' => '車名は必須です',
