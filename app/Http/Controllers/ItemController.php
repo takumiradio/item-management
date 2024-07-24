@@ -39,12 +39,13 @@ class ItemController extends Controller
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:20',
-                'image' => 'required|image',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'detail' => 'required|max:100',
             ],[
                 'name.required' => '車名は必須です',
                 'name.max' => '車名は20文字までです',
                 'image.required' => '画像は必須です',
+                'image.max' => '画像サイズが大きすぎて添付できません',
                 'detail.required' => '詳細は必須です',
                 'detail.max' => '詳細は100文字以下です'
             ]);
