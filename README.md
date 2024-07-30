@@ -1,43 +1,27 @@
-## 商品管理システム
+# 我が家のトミカ管理システム
 
-### 環境構築手順
+## 概要
+このシステムでは、自分の家にあるトミカを一目見て管理することができます。
+トミカの登録、編集削除を行うことができ、必要に応じて我が家のトミカの情報を管理できます。
 
-* Gitクローン
-* .env.example をコピーして .env を作成
-* MySQLのデータベース作成（名前：item_management）
-* Macの場合 .env の DB_PASSWORD を root に修正（Windowsは修正不要）
+## 主な機能
+- ログイン・ログアウト機能
+- 登録機能
+- 編集機能
+- 削除機能
 
-    ```INI
-    DB_PASSWORD=root
-    ```
+## 開発環境
+- PHP 8.2.0
+- Lavel 10.13.5
+- mysql 14.14
 
-* APP_KEY生成
+## 設計書
+[設計書へ](https://drive.google.com/drive/folders/1oAIpL49Xg5HsV99Asj_x_UJvfNpypGjo?hl=ja)
 
-    ```console
-    php artisan key:generate
-    ```
+## システム閲覧
+[アプリケーションページへ](https://item-management3-44128afc756f.herokuapp.com/login)
 
-* Composerインストール
+### テストアカウント情報
 
-    ```console
-    composer install
-    ```
-
-* フロント環境構築
-
-    ```console
-    npm ci
-    npm run build
-    ```
-
-* マイグレーション
-
-    ```console
-    php artisan migrate
-    ```
-
-* 起動
-
-    ```console
-    php artisan serve
-    ```
+- メールアドレス : tomica@123
+- パスワード : aaaaaaaa
