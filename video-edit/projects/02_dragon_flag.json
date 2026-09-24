@@ -1,7 +1,7 @@
 {
   "titles": [
-    {"start": 0,     "end": 27.99, "no": "TRAINING 02", "jp": "ドラゴンフラッグ", "en": "DRAGON FLAG"},
-    {"start": 27.99, "end": null,  "no": "TRAINING 02", "jp": "腹筋",             "en": "SIT-UP"}
+    {"start": 0,     "end": 28.42, "no": "TRAINING 02", "jp": "ドラゴンフラッグ", "en": "DRAGON FLAG"},
+    {"start": 28.42, "end": null,  "no": "TRAINING 02", "jp": "腹筋",             "en": "SIT-UP"}
   ],
   "telops": [
     {"start": 0.05,  "end": 2.99,  "text": "次は[お腹]のトレーニングになります"},
