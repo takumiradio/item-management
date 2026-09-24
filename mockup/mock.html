@@ -1,0 +1,81 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111;display:flex;gap:40px;padding:40px;font-family:'Noto Sans JP',sans-serif}
+.frame{width:540px;height:960px;position:relative;overflow:hidden;border-radius:6px}
+.cap{color:#aaa;font:500 14px Inter,sans-serif;letter-spacing:.2em;margin-bottom:12px}
+/* ---- placeholder scene ---- */
+.scene{position:absolute;inset:0}
+.grade{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 45%,transparent 40%,rgba(0,0,0,.75) 100%)}
+.topshade{position:absolute;left:0;right:0;top:0;height:260px;background:linear-gradient(rgba(0,0,0,.55),transparent)}
+.botshade{position:absolute;left:0;right:0;bottom:0;height:360px;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+/* ---- A: minimal cinematic ---- */
+.a .title{position:absolute;left:36px;top:52px;color:#fff}
+.a .no{font:500 13px 'Inter',sans-serif;letter-spacing:.32em;color:#D9FF4A;display:flex;align-items:center;gap:10px}
+.a .no:before{content:"";width:22px;height:2px;background:#D9FF4A}
+.a .jp{font-weight:900;font-size:44px;letter-spacing:.06em;margin-top:10px;line-height:1.1;text-shadow:0 2px 18px rgba(0,0,0,.4)}
+.a .en{font:300 13px 'Inter',sans-serif;letter-spacing:.5em;margin-top:8px;opacity:.85}
+.a .telop{position:absolute;left:0;right:0;bottom:120px;text-align:center;color:#fff;font-weight:700;font-size:30px;line-height:1.55;letter-spacing:.04em;
+  text-shadow:0 0 2px rgba(0,0,0,.9),0 2px 8px rgba(0,0,0,.8),0 0 24px rgba(0,0,0,.5)}
+.a .telop em{font-style:normal;color:#D9FF4A}
+.a .bar{position:absolute;left:36px;right:36px;bottom:60px;height:2px;background:rgba(255,255,255,.2)}
+.a .bar i{display:block;width:42%;height:100%;background:#D9FF4A}
+/* ---- B: sporty bold ---- */
+.b .title{position:absolute;left:0;top:56px}
+.b .t1{display:inline-block;background:#D9FF4A;color:#0b0b0b;font-weight:900;font-size:40px;padding:10px 26px 10px 32px;letter-spacing:.05em;clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%)}
+.b .t2{display:flex;gap:12px;align-items:center;background:#0b0b0b;color:#fff;font:700 13px 'Inter',sans-serif;letter-spacing:.3em;padding:8px 22px 8px 32px;width:max-content;margin-top:0;clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.b .t2 span{color:#D9FF4A}
+.b .telop{position:absolute;left:28px;right:28px;bottom:110px;text-align:center}
+.b .telop div{display:inline-block;background:rgba(10,10,10,.72);backdrop-filter:blur(6px);color:#fff;font-weight:700;font-size:25px;line-height:1.5;padding:14px 22px;white-space:nowrap;border-radius:12px;letter-spacing:.03em;border-left:4px solid #D9FF4A}
+.b .telop em{font-style:normal;background:linear-gradient(transparent 62%,rgba(217,255,74,.55) 62%);}
+.b .rep{position:absolute;right:28px;top:60px;color:#fff;text-align:right;font:800 46px 'Inter',sans-serif;line-height:1}
+.b .rep small{display:block;font:600 11px 'Inter',sans-serif;letter-spacing:.3em;color:#D9FF4A;margin-bottom:4px}
+</style></head><body>
+<template id="scene">
+<svg class="scene" viewBox="0 0 540 960" preserveAspectRatio="xMidYMid slice">
+ <defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3d44"/><stop offset="1" stop-color="#23252a"/></linearGradient>
+  <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b4a3b"/><stop offset="1" stop-color="#2c231c"/></linearGradient>
+  <radialGradient id="light" cx=".7" cy=".15" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="1.2"/></filter>
+ </defs>
+ <rect width="540" height="600" fill="url(#wall)"/>
+ <rect y="600" width="540" height="360" fill="url(#floor)"/>
+ <g stroke="#000" stroke-opacity=".12">
+  <line x1="0" y1="680" x2="540" y2="680"/><line x1="0" y1="780" x2="540" y2="780"/><line x1="0" y1="900" x2="540" y2="900"/>
+ </g>
+ <rect width="540" height="960" fill="url(#light)"/>
+ <ellipse cx="270" cy="700" rx="210" ry="14" fill="#000" opacity=".35" filter="url(#soft)"/>
+ <!-- push-up silhouette -->
+ <g fill="none" stroke="#15171b" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft)">
+  <path d="M105 650 L140 628" stroke-width="20"/>          <!-- lower leg -->
+  <path d="M140 628 L250 596" stroke-width="30"/>          <!-- thigh -->
+  <path d="M250 596 L385 560" stroke-width="44"/>          <!-- torso -->
+  <path d="M378 566 L392 628 L386 694" stroke-width="18"/> <!-- arm -->
+  <path d="M100 690 L108 650" stroke-width="14"/>          <!-- foot -->
+  <path d="M372 694 L402 694" stroke-width="10"/>          <!-- hand -->
+ </g>
+ <circle cx="420" cy="548" r="24" fill="#15171b" filter="url(#soft)"/>
+</svg>
+<div class="grade"></div><div class="topshade"></div><div class="botshade"></div>
+</template>
+
+<div><div class="cap">A — MINIMAL / CINEMATIC</div>
+<div class="frame a" data-scene>
+ <div class="title"><div class="no">TRAINING 01</div><div class="jp">腕立て伏せ</div><div class="en">PUSH-UP</div></div>
+ <div class="telop">手は肩の真下について<br>頭からかかとまで<em>一直線</em>をキープ</div>
+ <div class="bar"><i></i></div>
+</div></div>
+
+<div><div class="cap">B — SPORTY / BOLD</div>
+<div class="frame b" data-scene>
+ <div class="title"><div class="t1">腕立て伏せ</div><br><div class="t2">PUSH-UP <span>/</span> CHEST · ARMS</div></div>
+ <div class="rep"><small>REPS</small>08</div>
+ <div class="telop"><div>手は肩の真下について<br>頭からかかとまで<em>一直線</em>をキープ</div></div>
+</div></div>
+
+<script>
+document.querySelectorAll('[data-scene]').forEach(f=>f.prepend(document.getElementById('scene').content.cloneNode(true)));
+</script>
+</body></html>
