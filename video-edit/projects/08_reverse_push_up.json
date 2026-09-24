@@ -1,6 +1,6 @@
 {
   "titles": [
-    {"start": 0, "end": null, "no": "TRAINING 08", "jp": "リバース\nプッシュアップ", "en": "REVERSE PUSH-UP"}
+    {"start": 0, "end": null, "no": "TRAINING 08", "jp": "リバース\nプッシュアップ", "en": "REVERSE PUSH-UP", "size": 60}
   ],
   "telops": [
     {"start": 0.30,  "end": 4.00,  "text": "では [リバースプッシュアップ]の解説をしていきます"},

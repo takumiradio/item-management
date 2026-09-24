@@ -25,7 +25,7 @@ const shot = async (id, fn, arg, path) => {
 };
 await shot('grad', '', null, `${out}/grad.png`);
 for (const [i, t] of cfg.titles.entries())
-  await shot('ttl', "for (const k of ['no','jp','en']) document.getElementById(k).textContent = arg[k];", t, `${out}/title_${i}.png`);
+  await shot('ttl', "for (const k of ['no','jp','en']) document.getElementById(k).textContent = arg[k]; document.getElementById('jp').style.fontSize = (arg.size || 81) + 'px';", t, `${out}/title_${i}.png`);
 for (const [i, t] of cfg.telops.entries())
   await shot('tel', "document.getElementById('telop').innerHTML = arg;",
     esc(t.text).replace(/\[(.+?)\]/g, '<em>$1</em>'), `${out}/telop_${String(i).padStart(2, '0')}.png`);
