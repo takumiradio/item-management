@@ -1,36 +1,32 @@
-// Renders transparent 1920x1080 PNG overlays from telops.json
+// Renders transparent 1920x1080 PNG overlays from a project config
+// usage: node make_overlays.mjs projects/XX.json OUT_DIR
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import fs from 'fs';
-const cfg = JSON.parse(fs.readFileSync('telops.json', 'utf8'));
-const out = process.argv[2] || 'overlays';
+const cfg = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+const out = process.argv[3];
 fs.mkdirSync(out, { recursive: true });
 const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
 await p.goto('file://' + process.cwd() + '/overlay.html');
-await p.evaluate(async () => {
-  for (const f of ['700 20px Inter', '900 20px "Noto Sans JP"', '700 20px "Noto Sans JP"']) await document.fonts.load(f, '腕立て伏せ手幅ABC');
-  await document.fonts.ready;
-});
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-const show = async (id, fn, arg) => {
+const shot = async (id, fn, arg, path) => {
   await p.evaluate(([id, fn, arg]) => {
     document.querySelectorAll('.layer').forEach(l => l.style.display = 'none');
     document.getElementById(id).style.display = 'block';
     new Function('arg', fn)(arg);
   }, [id, fn, arg]);
-  // Google Fonts splits Noto Sans JP into unicode-range subsets: load the ones this text needs
+  // Noto Sans JP ships as unicode-range subsets: load the ones this text needs
   await p.evaluate(async () => {
     const txt = document.body.innerText;
-    for (const w of ['700', '900']) await document.fonts.load(`${w} 40px "Noto Sans JP"`, txt);
+    for (const f of ['700 40px "Noto Sans JP"', '900 40px "Noto Sans JP"', '500 40px Inter', '700 40px Inter']) await document.fonts.load(f, txt);
     await document.fonts.ready;
   });
-  await p.waitForLoadState('networkidle');
+  await p.screenshot({ path, omitBackground: true });
 };
-await show('base', "for (const k of ['no','jp','en']) document.getElementById(k).textContent = arg[k];", cfg.title);
-await p.screenshot({ path: `${out}/base.png`, omitBackground: true });
-for (const [i, t] of cfg.telops.entries()) {
-  const html = esc(t.text).replace(/\[(.+?)\]/g, '<em>$1</em>');
-  await show('tel', "document.getElementById('telop').innerHTML = arg;", html);
-  await p.screenshot({ path: `${out}/telop_${String(i).padStart(2, '0')}.png`, omitBackground: true });
-}
+await shot('grad', '', null, `${out}/grad.png`);
+for (const [i, t] of cfg.titles.entries())
+  await shot('ttl', "for (const k of ['no','jp','en']) document.getElementById(k).textContent = arg[k];", t, `${out}/title_${i}.png`);
+for (const [i, t] of cfg.telops.entries())
+  await shot('tel', "document.getElementById('telop').innerHTML = arg;",
+    esc(t.text).replace(/\[(.+?)\]/g, '<em>$1</em>'), `${out}/telop_${String(i).padStart(2, '0')}.png`);
 await b.close();
